@@ -5,6 +5,17 @@
     <update id="updateStatusById">
         update employee set status = #{status} where id = #{id}
     </update>
+    <update id="update">
+        update employee set
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="username != null and username != ''">username = #{username},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="sex != null and sex != ''">sex = #{sex},</if>
+            <if test="idNumber != null and idNumber !=''">id_number = #{idNumber},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateUser != null and updateUser != ''">update_user = #{updateUser}</if>
+        where id = #{id}
+    </update>
 
     <select id="getByName" resultType="com.sky.entity.Employee">
         select * from employee

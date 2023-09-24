@@ -6,6 +6,7 @@ import com.sky.constant.JwtClaimsConstant;
 import com.sky.constant.MessageConstant;
 import com.sky.constant.PasswordConstant;
 import com.sky.constant.StatusConstant;
+import com.sky.context.BaseContext;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.dto.EmployeePageQueryDTO;
@@ -112,6 +113,29 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Result status(Integer status, Integer id) {
         int rows = employeeMapper.updateStatusById(status,id);
+        if(rows == 0) {
+            throw new AccountNotFoundException(MessageConstant.ACCOUNT_NOT_FOUND);
+        }
+        return Result.success(null);
+    }
+
+    @Override
+    public Result getEmployeeById(Integer id) {
+        Employee employee = employeeMapper.getById(id);
+        if(employee == null) {
+            throw new AccountNotFoundException(MessageConstant.ACCOUNT_NOT_FOUND);
+        }
+        employee.setPassword("");
+        return Result.success(employee);
+    }
+
+    @Override
+    public Result updateEmployeeInfo(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO,employee);
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+        int rows = employeeMapper.update(employee);
         if(rows == 0) {
             throw new AccountNotFoundException(MessageConstant.ACCOUNT_NOT_FOUND);
         }

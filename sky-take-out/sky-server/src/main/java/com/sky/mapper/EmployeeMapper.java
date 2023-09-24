@@ -28,4 +28,9 @@ public interface EmployeeMapper {
     List<Employee> getByName(String name);
 
     int updateStatusById(@Param("status") Integer status, @Param("id") Integer id);
+
+    @Select("select * from employee where id = #{id}")
+    Employee getById(Integer id);
+
+    int update(Employee employee);
 }
