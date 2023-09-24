@@ -33,4 +33,6 @@ public interface EmployeeMapper {
     Employee getById(Integer id);
 
     int update(Employee employee);
+
+    void updatePasswordByid(Employee employee);
 }
