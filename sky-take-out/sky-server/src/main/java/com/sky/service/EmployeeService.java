@@ -19,4 +19,6 @@ public interface EmployeeService {
     Result<String> addEmployee(EmployeeDTO employee,String token);
 
     Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO);
+
+    Result status(Integer status, Integer id);
 }

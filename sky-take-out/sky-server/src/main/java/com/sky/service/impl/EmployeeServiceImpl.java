@@ -109,4 +109,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         return Result.success(pageResult);
     }
 
+    @Override
+    public Result status(Integer status, Integer id) {
+        int rows = employeeMapper.updateStatusById(status,id);
+        if(rows == 0) {
+            throw new AccountNotFoundException(MessageConstant.ACCOUNT_NOT_FOUND);
+        }
+        return Result.success(null);
+    }
+
 }

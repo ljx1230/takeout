@@ -3,6 +3,7 @@ package com.sky.mapper;
 import com.sky.entity.Employee;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface EmployeeMapper {
     void insert(Employee employee);
 
     List<Employee> getByName(String name);
+
+    int updateStatusById(@Param("status") Integer status, @Param("id") Integer id);
 }
