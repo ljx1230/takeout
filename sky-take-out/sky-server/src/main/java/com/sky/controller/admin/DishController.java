@@ -50,4 +50,19 @@ public class DishController {
         dishService.status(status,id);
         return Result.success();
     }
+
+    @GetMapping("{id}")
+    @ApiOperation("根据id查询菜品")
+    public Result info(@PathVariable Long id) {
+        log.info("根据id查询菜品",id);
+        Result result = dishService.info(id);
+        return result;
+    }
+
+    @PutMapping
+    @ApiOperation("修改菜品")
+    public Result update(@RequestBody DishDTO dishDTO) {
+        Result result = dishService.update(dishDTO);
+        return result;
+    }
 }

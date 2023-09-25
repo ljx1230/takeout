@@ -32,4 +32,9 @@ public interface DishMapper {
     void deleteByids(@Param("ids") List<Long> ids);
 
     void updateStatusById(@Param("status") Integer status, @Param("id") Long id);
+
+    Dish getDishInfoById(Long id);
+
+    @AutoFill(OperationType.UPDATE)
+    void update(Dish dish);
 }
