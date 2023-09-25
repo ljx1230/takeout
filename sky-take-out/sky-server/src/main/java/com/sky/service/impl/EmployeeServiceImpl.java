@@ -84,13 +84,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setStatus(StatusConstant.ENABLE);
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
 
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
+//        employee.setCreateTime(LocalDateTime.now());
+//        employee.setUpdateTime(LocalDateTime.now());
 
         Claims claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(),token);
         Long empId = Long.valueOf(claims.get(JwtClaimsConstant.EMP_ID).toString());
-        employee.setCreateUser(empId);
-        employee.setUpdateUser(empId);
+//        employee.setCreateUser(empId);
+//        employee.setUpdateUser(empId);
 
         employeeMapper.insert(employee);
         return Result.success(null);
@@ -134,8 +134,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Result updateEmployeeInfo(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDTO,employee);
-        employee.setUpdateTime(LocalDateTime.now());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+//        employee.setUpdateTime(LocalDateTime.now());
+//        employee.setUpdateUser(BaseContext.getCurrentId());
         int rows = employeeMapper.update(employee);
         if(rows == 0) {
             throw new AccountNotFoundException(MessageConstant.ACCOUNT_NOT_FOUND);
