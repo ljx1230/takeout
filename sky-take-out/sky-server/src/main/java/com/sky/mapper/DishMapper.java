@@ -3,9 +3,12 @@ package com.sky.mapper;
 import com.sky.annotation.AutoFill;
 import com.sky.entity.Dish;
 import com.sky.enumeration.OperationType;
+import com.sky.vo.DishVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper
 public interface DishMapper {
@@ -20,4 +23,6 @@ public interface DishMapper {
 
     @AutoFill(OperationType.INSERT)
     int insertDish(Dish dish);
+
+    List<DishVO> getDishVoList(Dish dish);
 }
