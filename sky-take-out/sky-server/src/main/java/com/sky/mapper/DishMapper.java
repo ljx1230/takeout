@@ -6,6 +6,7 @@ import com.sky.enumeration.OperationType;
 import com.sky.vo.DishVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -25,4 +26,8 @@ public interface DishMapper {
     int insertDish(Dish dish);
 
     List<DishVO> getDishVoList(Dish dish);
+
+    List<Dish> getListByIds(@Param("ids") List<Long> ids);
+
+    void deleteByids(@Param("ids") List<Long> ids);
 }
