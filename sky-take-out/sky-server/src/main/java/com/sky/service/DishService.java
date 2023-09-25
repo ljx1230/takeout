@@ -12,4 +12,6 @@ public interface DishService {
     Result page(DishPageQueryDTO dishPageQueryDTO);
 
     Result deleteBatch(List<Long> ids);
+
+    void status(Integer status,Long id);
 }

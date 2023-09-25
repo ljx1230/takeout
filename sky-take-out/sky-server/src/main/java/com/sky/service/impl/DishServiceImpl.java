@@ -79,4 +79,9 @@ public class DishServiceImpl implements DishService {
         flavorMapper.deleteByDishIds(ids);
         return Result.success();
     }
+
+    @Override
+    public void status(Integer status,Long id) {
+        dishMapper.updateStatusById(status,id);
+    }
 }

@@ -30,4 +30,6 @@ public interface DishMapper {
     List<Dish> getListByIds(@Param("ids") List<Long> ids);
 
     void deleteByids(@Param("ids") List<Long> ids);
+
+    void updateStatusById(@Param("status") Integer status, @Param("id") Long id);
 }
