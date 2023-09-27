@@ -19,4 +19,6 @@ public interface DishService {
     Result info(Long id);
 
     Result update(DishDTO dishDTO);
+
+    Result list(Long categoryId);
 }

@@ -52,4 +52,7 @@
     <select id="getDishInfoById" resultType="com.sky.entity.Dish">
         select * from dish where id = #{id}
     </select>
+    <select id="getDIshListByCategoryId" resultType="com.sky.entity.Dish">
+        select * from dish where category_id = #{categoryId} and status = 1
+    </select>
 </mapper>
