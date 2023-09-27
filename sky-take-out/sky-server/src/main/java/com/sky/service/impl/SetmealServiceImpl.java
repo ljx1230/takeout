@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -97,5 +98,38 @@ public class SetmealServiceImpl implements SetmealService {
         setmealDishMapper.deleteBySetmealIds(ids);
         // 删除setmeal数据
         setmealMapper.deleteByIds(ids);
+    }
+
+    @Override
+    public SetmealVO getInfoById(Long id) {
+        SetmealVO setmealVO = new SetmealVO();
+        ArrayList<Long> list = new ArrayList<>();
+        list.add(id);
+        List<Setmeal> setmealList = setmealMapper.getByIds(list);
+        BeanUtils.copyProperties(setmealList.get(0),setmealVO);
+        setmealVO.setSetmealDishes(setmealDishMapper.getBySetMealId(id));
+        return setmealVO;
+    }
+
+    @Override
+    @Transactional
+    public void update(SetmealDTO setmealDTO) {
+        Setmeal setmeal = new Setmeal();
+        BeanUtils.copyProperties(setmealDTO,setmeal);
+        setmealMapper.update(setmeal);
+
+
+        List<SetmealDish> setmealDishList = setmealDTO.getSetmealDishes();
+        for(SetmealDish setmealDish : setmealDishList) {
+            setmealDish.setSetmealId(setmealDTO.getId());
+        }
+
+        ArrayList<Long> idList = new ArrayList<>();
+        setmealDishList.forEach(setmealDish -> idList.add(setmealDish.getSetmealId()));
+        System.out.println(idList);
+        setmealDishMapper.deleteBySetmealIds(idList);
+
+        setmealDishMapper.insertBatch(setmealDishList);
+
     }
 }
