@@ -6,9 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController("userShopController")
 @RequestMapping("user/shop")
@@ -28,4 +26,5 @@ public class ShopController {
         log.info("用户端获取店铺营业状态为:{}",shop_status == 1 ? "营业中" : "打烊中");
         return Result.success(shop_status);
     }
+
 }
